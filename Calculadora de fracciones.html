@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Suma de Fracciones</title>
+    <style>
+        body {
+            background-color: pink;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 2px solid black;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Suma de Fracciones</h1>
+    <table>
+        <tr>
+            <th>Fracción 1</th>
+            <th>Fracción 2</th>
+            <th>Resultado</th>
+        </tr>
+        <tr>
+            <td><input type="text" id="frac1_num" placeholder="Numerador"></td>
+            <td><input type="text" id="frac2_num" placeholder="Numerador"></td>
+            <td rowspan="2" id="result">-</td>
+        </tr>
+        <tr>
+            <td><input type="text" id="frac1_den" placeholder="Denominador"></td>
+            <td><input type="text" id="frac2_den" placeholder="Denominador"></td>
+        </tr>
+        <tr>
+            <td colspan="3"><button onclick="sumarFracciones()">Sumar</button></td>
+        </tr>
+    </table>
+    <a href="LaiOrtega.html"><button>inicio</button></a>
+    <script>
+        function sumarFracciones() {
+            const num1 = parseFloat(document.getElementById("frac1_num").value);
+            const den1 = parseFloat(document.getElementById("frac1_den").value);
+            const num2 = parseFloat(document.getElementById("frac2_num").value);
+            const den2 = parseFloat(document.getElementById("frac2_den").value);
+
+            if (!isNaN(num1) && !isNaN(den1) && !isNaN(num2) && !isNaN(den2) && den1 !== 0 && den2 !== 0) {
+                const resultadoNum = num1 * den2 + num2 * den1;
+                const resultadoDen = den1 * den2;
+                const maxComunDivisor = gcd(resultadoNum, resultadoDen);
+                const resultadoSimplificado = (resultadoNum / maxComunDivisor) + '/' + (resultadoDen / maxComunDivisor);
+                document.getElementById("result").textContent = resultadoSimplificado;
+            } else {
+                document.getElementById("result").textContent = "Error en las entradas";
+            }
+        }
+
+        function gcd(a, b) {
+            return b === 0 ? a : gcd(b, a % b);
+        }
+    </script>
+</body>
+</html>
